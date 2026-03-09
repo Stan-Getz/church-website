@@ -123,3 +123,41 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+
+header {
+  background-color: aquamarine;
+  padding: 10px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo navbar {
+  width: 68px;
+  height: 68px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.navlinks {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.social-media-links {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 10px;
+}
