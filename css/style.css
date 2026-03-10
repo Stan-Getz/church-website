@@ -172,3 +172,29 @@ a {
 .hero img {
   max-width: 100vw;
 }
+
+.page-title {
+  text-align: center;
+}
+
+.description {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .navlinks {
+    gap: 15px;
+  }
+
+  .navlinks a {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .navlinks {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
