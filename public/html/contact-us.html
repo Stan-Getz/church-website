@@ -42,7 +42,55 @@
     <main>
       <div>
         <h1 class="page-title">Contact us</h1>
-        
+      </div>
+      <form action="">
+        <fieldset>
+          <legend>Send us a message!</legend>
+          <p>
+            <label for="name">Your name:</label>
+            <input type="text" name="username" id="name" />
+          </p>
+          <p>
+            <label for="email">Your email:</label
+            ><input type="email" name="user_email" id="email" />
+          </p>
+          <label for="phone">Your phone number:</label>
+          <input type="tel" name="user_phone" id="phone" />
+          <section>
+            <ul>
+              <li>
+                <label for="ananonymous_message">
+                  <input
+                    type="radio"
+                    name="message_type"
+                    id="anonymous_message"
+                    value="send_anonymously"
+                  />
+                  Send anonymously
+                </label>
+              </li>
+              <li>
+                <label for="message_with_name">
+                  <input
+                    type="radio"
+                    name="message_type"
+                    id="message_with_name"
+                    value="message_with_name"
+                  />
+                  Send with the display of your name
+                </label>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <label for="contact_wish">
+              <input type="checkbox" name="contact" id="contact" />
+              Please check this box if want to be contacted by us?
+            </label>
+          </section>
+          <button type="submit">Send</button>
+        </fieldset>
+      </form>
     </main>
     <footer>
       <div>
