@@ -10,19 +10,22 @@ import mongoose from 'mongoose';
 const app = express();
 const PORT = 8080;
 
+const churchConn = mongoose.createConnection(
+  'mongodb://127.0.0.1:27017/church-website',
+);
+churchConn.on('connected', () =>
+  console.log('Connected to DB: church-website'),
+);
+
 const videoSchema = new mongoose.Schema({
   slug: { type: String, unique: true, required: true },
   name: { type: String, unique: true },
-  duration: { type: Number, required: true },
+  durationInMinutes: { type: Number, required: true },
   isWatched: { type: Boolean, default: false, required: true },
 });
 
-const Video = mongoose.model('Video', videoSchema);
-
-mongoose
-  .connect('mongodb://127.0.0.1:27017/church-website')
-  .then(() => console.log('Database connected!'))
-  .catch((error) => console.log(error));
+// 2. Привязываем модель к соединению церкви
+const Video = churchConn.model('Video', videoSchema);
 
 // const absolutePath = __dirname + '/html/index.html';
 
@@ -36,6 +39,27 @@ app.use(express.urlencoded({ extended: true }));
 //   response.sendFile(path.resolve('./public/html/index.html'));
 //   // response.send();
 // });
+
+app.get('/video-archive/new', (request, response) => {
+  response.render('video-archive/new');
+});
+
+app.post('/video-archive', async (request, response) => {
+  try {
+    const video = new Video({
+      slug: request.body.slug,
+      name: request.body.name,
+      durationInMinutes: request.body.durationInMinutes,
+    });
+    await video.save();
+
+    console.log('✅ Video saved to church-website');
+    response.send('Video created');
+  } catch (error) {
+    console.error(error);
+    response.send('Error: the video could not be created.');
+  }
+});
 
 app.get('/', (request, response) => {
   response.render('index');
