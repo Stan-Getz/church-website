@@ -17,6 +17,8 @@ const videoSchema = new mongoose.Schema({
   isWatched: { type: Boolean, default: false, required: true },
 });
 
+const Video = mongoose.model('Video', videoSchema);
+
 mongoose
   .connect('mongodb://127.0.0.1:27017/church-website')
   .then(() => console.log('Database connected!'))
