@@ -43,7 +43,7 @@
       <div>
         <h1 class="page-title">Contact us</h1>
       </div>
-      <form action="">
+      <form action="/contact-us" method="post">
         <fieldset>
           <legend>Send us a message!</legend>
           <p>
@@ -54,8 +54,14 @@
             <label for="email">Your email:</label
             ><input type="email" name="user_email" id="email" />
           </p>
-          <label for="phone">Your phone number:</label>
-          <input type="tel" name="user_phone" id="phone" />
+          <p>
+            <label for="phone">Your phone number:</label>
+            <input type="tel" name="user_phone" id="phone" />
+          </p>
+          <p>
+            <label for="message">Your message to us:</label>
+            <textarea name="message" id="message"></textarea>
+          </p>
           <section>
             <ul>
               <li>
