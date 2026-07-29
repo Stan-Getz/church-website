@@ -5,9 +5,22 @@
 import express, { response } from 'express';
 import { request } from 'http';
 import path from 'path';
+import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 8080;
+
+const videoSchema = new mongoose.Schema({
+  slug: { type: String, unique: true, required: true },
+  name: { type: String, unique: true },
+  duration: { type: Number, required: true },
+  isWatched: { type: Boolean, default: false, required: true },
+});
+
+mongoose
+  .connect('mongodb://127.0.0.1:27017/church-website')
+  .then(() => console.log('Database connected!'))
+  .catch((error) => console.log(error));
 
 // const absolutePath = __dirname + '/html/index.html';
 
