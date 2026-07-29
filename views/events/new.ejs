@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <body>
+    <main>
+      <h2>Create a new event</h2>
+
+      <form action="/events" method="POST">
+        <input type="text" name="name" placeholder="name" required /><br />
+        <input type="text" name="slug" placeholder="slug" required /><br />
+        <input
+          type="date"
+          name="dateOfEvent"
+          placeholder="choose a date"
+          min="2026-08-01"
+          max="2027-07-31"
+          required
+        /><br />
+        <input
+          type="text"
+          name="placeOfEvent"
+          placeholder="place of event"
+          required
+        />
+        <br />
+        <textarea
+          name="description"
+          id="description"
+          placeholder="Add a short description..."
+          required
+        ></textarea>
+        <br />
+        <input
+          type="text"
+          name="hostedBy"
+          placeholder="Who is hosting the event?"
+          required
+        />
+        <br />
+        <input type="tel" name="contactPhone" required />
+
+        <button>Save</button>
+      </form>
+    </main>
+  </body>
+</html>

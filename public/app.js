@@ -24,8 +24,19 @@ const videoSchema = new mongoose.Schema({
   isWatched: { type: Boolean, default: false, required: true },
 });
 
-// 2. Привязываем модель к соединению церкви
 const Video = churchConn.model('Video', videoSchema);
+
+const eventSchema = new mongoose.Schema({
+  slug: { type: String, unique: true, required: true },
+  name: { type: String, unique: true, required: true },
+  dateOfEvent: { type: Date, required: true },
+  placeOfEvent: { type: String, required: true },
+  description: { type: String, required: true },
+  hostedBy: { type: String, required: true },
+  contactPhone: { type: String, required: true },
+});
+
+const Event = churchConn.model('Event', eventSchema);
 
 // const absolutePath = __dirname + '/html/index.html';
 
@@ -58,6 +69,47 @@ app.post('/video-archive', async (request, response) => {
   } catch (error) {
     console.error(error);
     response.send('Error: the video could not be created.');
+  }
+});
+
+app.get('/events', (request, response) => {
+  const fileSlug = request.params[0];
+
+  if (fileSlug === 'favicon.ico') {
+    return response.sendStatus(204);
+  }
+
+  const filePath = path.resolve(`./public/html/${fileSlug}.html`);
+
+  response.sendFile(filePath, (err) => {
+    if (err) {
+      response.status(404).sendFile(path.resolve('./public/html/404.html'));
+    }
+  });
+});
+
+app.get('/events/new', (request, response) => {
+  response.render('events/new');
+});
+
+app.post('/events', async (request, response) => {
+  try {
+    const event = new Event({
+      slug: request.body.slug,
+      name: request.body.name,
+      dateOfEvent: request.body.dateOfEvent,
+      placeOfEvent: request.body.placeOfEvent,
+      description: request.body.description,
+      hostedBy: request.body.hostedBy,
+      contactPhone: request.body.contactPhone,
+    });
+    await event.save();
+
+    console.log('Event saved to church-website');
+    response.send('Event created');
+  } catch (error) {
+    console.error(error);
+    response.send('Error: the event could not be created');
   }
 });
 
